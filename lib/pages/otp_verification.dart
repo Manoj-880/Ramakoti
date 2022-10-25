@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
 import 'package:ramkoti/pages/writingpad_page.dart';
@@ -109,7 +110,11 @@ class _OTPVerificationState extends State<OTPVerification> {
                 height: 20,
               ),
               GestureDetector(
-                onTap: () {
+                onTap: () async {
+                  WidgetsFlutterBinding.ensureInitialized();
+                  await SystemChrome.setPreferredOrientations(
+                      [DeviceOrientation.landscapeLeft]);
+                  // ignore: use_build_context_synchronously
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const WritingPad()),

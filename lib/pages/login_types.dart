@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:ramkoti/pages/mobilenumber_page.dart';
 import 'package:ramkoti/pages/register_page.dart';
@@ -202,7 +203,11 @@ class _LoginTypes extends State<LoginTypes> {
                       height: 15,
                     ),
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
+                        WidgetsFlutterBinding.ensureInitialized();
+                        await SystemChrome.setPreferredOrientations(
+                            [DeviceOrientation.landscapeLeft]);
+                        // ignore: use_build_context_synchronously
                         Navigator.push(
                           context,
                           MaterialPageRoute(
